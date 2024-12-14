@@ -1,3 +1,12 @@
+---
+layout: default
+title: "Moving Averages in Financial Analysis"
+---
+
+<script type="text/javascript" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+
 # TL;DR
 This blog introduces the concept of moving averages, a fundamental tool in financial analysis used to smooth time series data. We’ll explain what moving averages are, why they're used, visualize their effects on time series data, and present Python code for both a simple and optimized implementation. We’ll also analyze the time complexity of each approach.
 
@@ -14,9 +23,7 @@ A moving average is a technique used to smooth out fluctuations in time series d
 ### Formula for Moving Averages
 - **Simple Moving Average (SMA):**
   
-  \[
-  \text{SMA}_t = \frac{1}{w} \sum_{i=0}^{w-1} x_{t-i}
-  \]
+  $$ \text{SMA}_t = \frac{1}{w} \sum_{i=0}^{w-1} x_{t-i} $$
   
   Where:
   - \( \text{SMA}_t \) is the moving average at time \( t \),
@@ -25,9 +32,7 @@ A moving average is a technique used to smooth out fluctuations in time series d
 
 - **Exponential Moving Average (EMA):**
 
-  \[
-  \text{EMA}_t = \alpha \cdot x_t + (1 - \alpha) \cdot \text{EMA}_{t-1}
-  \]
+  $$ \text{EMA}_t = \alpha \cdot x_t + (1 - \alpha) \cdot \text{EMA}_{t-1} $$
 
   Where:
   - \( \alpha \) is the smoothing factor, often calculated as \( \frac{2}{w+1} \).
@@ -52,4 +57,22 @@ Below is an example of raw and smoothed stock price data using a moving average.
 
 ---
 
-$$ \text{SMA}_t = \frac{1}{w} \sum_{i=0}^{w-1} x_{t-i} $$
+## Python Code: Simple Implementation
+
+Here’s how you can compute a simple moving average in Python using basic libraries.
+
+```python
+import numpy as np
+import pandas as pd
+
+# Sample time series data (e.g., daily stock prices)
+data = [100, 102, 104, 98, 97, 95, 96, 99, 101, 102]
+
+# Convert to Pandas DataFrame
+df = pd.DataFrame(data, columns=['Price'])
+
+# Compute Simple Moving Average with a window size of 3
+window_size = 3
+df['SMA'] = df['Price'].rolling(window=window_size).mean()
+
+print(df)
