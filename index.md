@@ -52,22 +52,4 @@ Below is an example of raw and smoothed stock price data using a moving average.
 
 ---
 
-## Python Code: Simple Implementation
-
-Here’s how you can compute a simple moving average in Python using basic libraries.
-
-```python
-import numpy as np
-import pandas as pd
-
-# Sample time series data (e.g., daily stock prices)
-data = [100, 102, 104, 98, 97, 95, 96, 99, 101, 102]
-
-# Convert to Pandas DataFrame
-df = pd.DataFrame(data, columns=['Price'])
-
-# Compute Simple Moving Average with a window size of 3
-window_size = 3
-df['SMA'] = df['Price'].rolling(window=window_size).mean()
-
-print(df)
+$$ \text{SMA}_t = \frac{1}{w} \sum_{i=0}^{w-1} x_{t-i} $$
